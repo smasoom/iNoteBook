@@ -1,26 +1,17 @@
+const connectTomongo = require('./db'); // Ensure your MongoDB connection file is correctly set up
+const express = require('express');
+connectTomongo();
 
-const connectTomongo= require('./db')
-const express = require('express')
-connectTomongo()
-const app = express()
-const port = 3000
-app.use(express.json())
-// app.get('/', (req, res) => {
-//   res.send('Hello Masoom')
-// })
+const app = express();
+const port = 5000
 
-app.use('/api/auth',require('./routes/auth'))
-// app.use('api/notes',require('./routes/notes'))
+// Middleware to parse JSON request bodies
+app.use(express.json());
 
+// Use the auth route
+app.use('/api/auth', require('./routes/auth'));
 
-
-
-
-
-
-
-
-
+// Start the server
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Example app listening on port ${port}`);
+});
